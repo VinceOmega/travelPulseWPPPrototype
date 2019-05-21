@@ -90,6 +90,8 @@ function produceOutput( $content ){
 
 }
 
+
+
 function produceOutput__Worker( $content ){
 
 	$html = '';
@@ -115,3 +117,53 @@ HMU; //Thanks, I hate it. I wish there was a way to space the end of a heradoc. 
 	return $html;
 
 }
+
+
+/* Work on abstracting this further */
+
+/*
+function produceOutput__Worker( $content ){
+
+	$html 				= '';
+	$dom 				= new DOMDocument();
+
+	foreach( $content as $item ){
+
+		$news_container 				= $dom->createElement( 'div' ); $news_container ->setAttribute( 'class', 'news-container' );
+		$news_container__full 			= $dom->createElement( 'div' ); $news_container__full->setAttribute( 'class', 'news-container__full' );
+		$news_container__full->appendChild( new DomText( $item[ 'title' ] ) );
+
+		$news_container__left 			= $dom->createElement( 'div' ); $news_container__left ->setAttribute( 'class', 'news_container__left' );
+
+		$news_container__left__img  	= $dom->createElement( 'img' ); $news_container__left__img->setAttribute( 'src', $item[ 'image' ] );
+		$news_container__left__img->setAttribute( 'title', $item[ 'title' ] );
+		$news_container__left__img->setAttribute( 'alt', $item[ 'title' ] );
+
+		$news_container__left->appendChild( $news_container__left__img );
+
+		$news_container__right 			= $dom->createElement( 'div' ); $news_container__right ->setAttribute( 'class', 'news_container__right' );
+
+		$news_container__right__p 		= $dom->createElement( 'div' ); $news_container__right__p->appendChild( new DomText( $item[ 'preview' ] ) );
+		$news_container__right__a 		= $dom->createElement( 'a' ); 	$news_container__right__a->setAttribute( 'href', $item[ 'href' ] );
+		$news_container__right__a->appendChild( new DomText( '[read more]' ) );
+		$news_container__right__a->setAttribute( 'target', '_blank' );
+
+		$news_container__right->appendChild( $news_container__right__p );
+		$news_container__right->appendChild( $news_container__right__a );
+
+		$news_container->appendChild( $news_container__full );
+		$news_container->appendChild( $news_container__left );
+		$news_container->appendChild( $news_container__right );
+		$dom->appendChild( $news_container );
+		
+
+	}
+
+	ob_start();
+	echo $dom->saveHTML();
+	$html = ob_get_contents();
+	ob_end_clean();
+	return $html;
+
+}
+*/
